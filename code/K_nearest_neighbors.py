@@ -1,3 +1,46 @@
+"""
+##  NAME
+       K_nearest_neighbors.py
+##  VERSION
+        [2.0]
+##  AUTHOR
+	Luz Rosario Guevara Cruz <lguevara@lcg.unam.mx>
+	Ignacio Emmanuel Ramirez Bernabé <>
+##  GITHUB REPOSITORY
+	https://github.com/lro-guevara/Fungi-clustering
+##  DATE
+    2022/02/28
+##  DESCRIPTION
+    This program analyzes a dataset from UCI mushroom, train and
+    evaluate the data to predict results.
+##  CATEGORY
+    Data analysis, machine learning.
+##  USAGE
+	Bioinformatic usage in Python 3.0
+##  ARGUMENTS
+    No arguments are required.
+##Required library
+    import numpy
+    import matplotlib.pyplot as plt
+    from sklearn.model_selection import train_test_split
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.metrics import accuracy_score, f1_score, \
+    precision_score, recall_score, classification_report, \
+    confusion_matrix, plot_confusion_matrix
+
+##  INPUT
+    <data.txt> Contains the 22 atributes of the 8124 instances found
+    in "agaricus-lepiota.data"
+    <target.txt> Contains the classes of the instances found in first
+    column of"agaricus-lepiota.data".
+
+OUTPUT
+    <predicted_classes.png> Matrix confusion of the data.
+    <classification_report_k.txt> Specific data about prediction
+    with different k.
+
+"""
+
 import numpy
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
