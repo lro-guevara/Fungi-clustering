@@ -7,46 +7,54 @@ from sklearn.metrics import accuracy_score, f1_score, \
 import matplotlib.pyplot as plt
 
 
+# Crear lista de los datos de las caracteristicas
 data = []
 with open("data.txt") as file:
+    # Obtener cada valor de cada caracteristica
     for line in file:
         line = line.rstrip().split(",")
+        # Transformar el tipo de dato de caracter a int
         for i, characteristic in enumerate(line):
             line[i] = ord(characteristic)
+        # Anadir los valores a la lista
         data.append(line)
 
+# Transformar en array los valores de las caracteristicas
 data = numpy.array(data)
 
-target = []
-with open("target.txt") as file:
+# Crear lista de los datos de las clases
+classes = []
+with open("classes.txt") as file:
+    # Obtener las clases sin espacios o tabs
     for line in file:
         line = line.rstrip()
-        target.append(line)
+        # Guardar en la lista
+        classes.append(line)
 
-target = numpy.array(target)
+# Transformar en array los valores de las clases
+classes = numpy.array(classes)
 
-# Separamos el dataset en dos: entrenamiento y evaluación
-x_train, x_test, y_train, y_test = train_test_split(data, target,
+# Separar los datos para los sets de datos de entrenamiento y evaluacion
+x_train, x_test, y_train, y_test = train_test_split(data, classes,
                                                     test_size=0.30,
                                                     random_state=0)
 
 print(len(x_train), len(x_test), len(y_train), len(y_test))
 
-
 # Clasificación K Nearest neighbors
 k = 1
 
-# Definición del clasificador
+# Definir el clasificador
 classifier = KNeighborsClassifier(n_neighbors=k)
 
-# Entrenamiento del clasificador con lo datos de entrenamiento y valores
-# de clase para cada ejemplo
+# Entrenar el clasificador con lo datos de entrenamiento y los
+# valores de las clases
 classifier.fit(x_train, y_train)
 
-# Predicción con el clasificador entrenado en los datos de evaluación
+# Realizar la prediccion con el clasificador con los datos de evaluacion
 y_predict = classifier.predict(x_test)
 
-# Medidas de rendimiento del clasificador
+# Imprimir medidas de rendimiento del clasificador
 print("Accuracy: {}".format(accuracy_score(y_test, y_predict)))
 print("Precision: {}".format(precision_score(y_test, y_predict,
                                              average="macro")))
@@ -55,20 +63,22 @@ print("Recall: {}".format(recall_score(y_test, y_predict,
 print("F-score: {}".format(f1_score(y_test, y_predict,
                                     average="macro")))
 
-
-# Imprimir reporte de las metricas de clasificacion
-target_names = ['Poisonous', 'Edible']
+# Imprimir el reporte de las metricas de clasificacion
+target_names = ['Edible', 'Poisonous']
 print(classification_report(y_test, y_predict,
                             target_names=target_names))
 
-with open('classification_report.txt', 'w') as f:
+# Guardar el reporte de las metricas de clasificacion
+with open('classification_report_k1.txt', 'w') as f:
     f.write(classification_report(y_test, y_predict,
                                   target_names=target_names))
 
-# Imprimir matriz de confusion
+# Imprimir la matriz de confusion
 print(confusion_matrix(y_test, y_predict))
 
+# Generar la figura de la matriz de confusion
 plot_confusion_matrix(classifier, x_test, y_test, cmap=plt.cm.Blues,
-                      display_labels=['Poisonous', 'Edible'])
+                      display_labels=['Edible', 'Poisonous'])
 
-plt.savefig('predicted_classes.png')
+# Guardar la figura de la matriz de confusion
+plt.savefig('predicted_classes_k1.png')
