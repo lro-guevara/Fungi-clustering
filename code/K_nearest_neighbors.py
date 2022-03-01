@@ -5,7 +5,7 @@
         [2.0]
 ##  AUTHOR
 	Luz Rosario Guevara Cruz <lguevara@lcg.unam.mx>
-	Ignacio Emmanuel Ramirez Bernabé <>
+	Ignacio Emmanuel Ramirez Bernabé <iramirez@lcg.unam.mx>
 ##  GITHUB REPOSITORY
 	https://github.com/lro-guevara/Fungi-clustering
 ##  DATE
